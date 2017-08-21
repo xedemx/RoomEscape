@@ -6,7 +6,11 @@
 */DerivedDataCache
 */Intermediate
 */Saved
-RoomEscape/Content/StarterContent/
+RoomEscape/Content/StarterContent/Audio
+RoomEscape/Content/StarterContent/HDRI
+RoomEscape/Content/StarterContent/Maps
+RoomEscape/Content/StarterContent/Textures
+
 
 ##########################
 # Visual Studio Generated Files #
