@@ -30,17 +30,20 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float OpenAngle = 180.0f;
+	float OpenAngle = 90.0f;
+
+	UPROPERTY(EditAnywhere)
+	float ClosedAngle = 0.0f;
 	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
 	UPROPERTY(EditAnywhere)
-	float DoorCloseDelay = 0.5f;
+	float DoorCloseDelay = 0.5f; //in seconds
 
 	float LastDoorOpenTime;
 	
-	AActor* ActorThatOpens; //Remember Pawn inherits from Actor
+	AActor* ActorThatOpens; //Remember Pawn/Character inherits from Actor, so we get the actor even if we use a pawn or character
 	AActor* Owner; //The owning door
 
 };

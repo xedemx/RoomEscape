@@ -22,7 +22,7 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 	Owner = GetOwner(); //Find the owning Actor
-	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn(); // only actors can open the door
 }
 
 void UOpenDoor::OpenDoor()
@@ -34,7 +34,7 @@ void UOpenDoor::OpenDoor()
 void UOpenDoor::CloseDoor()
 {
 	//Set the door rotation
-	Owner->SetActorRotation(FRotator(0.0f, 90.0f, 0.0f));
+	Owner->SetActorRotation(FRotator(0.0f, ClosedAngle, 0.0f)); //default closed state of door
 }
 
 
