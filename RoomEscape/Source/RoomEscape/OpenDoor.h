@@ -34,6 +34,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float ClosedAngle = 0.0f;
+
+	UPROPERTY(EditAnywhere)
+	float TriggerMass = 50.0f;
 	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
@@ -43,7 +46,6 @@ private:
 
 	float LastDoorOpenTime;
 	
-	AActor* ActorThatOpens; //Remember Pawn/Character inherits from Actor, so we get the actor even if we use a pawn or character
 	AActor* Owner; //The owning door
 
 };

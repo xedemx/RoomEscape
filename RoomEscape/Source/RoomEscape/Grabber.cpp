@@ -67,7 +67,7 @@ void UGrabber::Grab()
 
 	///LINE TRACE and see if we reach any actors which physics body collision channel set
 	auto HitResult = GetFirstPhysicsBodyInReach();
-	auto ComponentToGrab = HitResult.GetComponent();
+	auto ComponentToGrab = HitResult.GetComponent(); //we get a mesh component in this case
 	auto ActorHit = HitResult.GetActor();
 
 	///If we hit something attach physics handle
@@ -85,7 +85,7 @@ void UGrabber::Grab()
 void UGrabber::Release()
 {
 	//Debug only: grab released
-	UE_LOG(LogTemp, Warning, TEXT("Grab released."))
+	//UE_LOG(LogTemp, Warning, TEXT("Grab released."))
 
 	/// Release physics handle
 	PhysicsHandle->ReleaseComponent();
@@ -100,7 +100,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 		OUT HitResult,
 		GetReachLineStart(),
 		GetReachLineEnd(),
-		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody), //we can only grab objects which have a physics body!
 		TraceParameters
 	);
 
