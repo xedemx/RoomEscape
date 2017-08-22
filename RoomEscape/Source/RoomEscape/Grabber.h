@@ -27,7 +27,8 @@ public:
 
 private:
 	//How far ahead of the player can we reach
-	float Reach = 200.0f;
+	UPROPERTY(EditAnywhere)
+	float Reach = 150.0f;
 	
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	

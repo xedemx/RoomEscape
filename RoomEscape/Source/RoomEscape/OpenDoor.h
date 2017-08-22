@@ -28,6 +28,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	
+
 private:
 	UPROPERTY(EditAnywhere)
 	float OpenAngle = 90.0f;
@@ -36,7 +38,7 @@ private:
 	float ClosedAngle = 0.0f;
 
 	UPROPERTY(EditAnywhere)
-	float TriggerMass = 50.0f;
+	float TriggerMass = 35.0f;
 	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
@@ -47,5 +49,8 @@ private:
 	float LastDoorOpenTime;
 	
 	AActor* Owner; //The owning door
+
+	//Returns total mass in kgs
+	float GetTotalMassOfActorsOnPlate();
 
 };
