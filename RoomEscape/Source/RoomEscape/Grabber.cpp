@@ -30,7 +30,7 @@ void UGrabber::FindPhysicsHandleComponent()
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (PhysicsHandle == nullptr)
 	{
-		UE_LOG(LogTemp, Error, TEXT("No Physics Handle is attached to Default Pawn: %s !"), *(GetOwner()->GetName()))
+		UE_LOG(LogTemp, Error, TEXT("No Physics Handle is attached to Pawn/Character: %s !!"), *(GetOwner()->GetName()))
 	}
 }
 
@@ -53,6 +53,8 @@ void UGrabber::SetupInputComponent()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent)
 	{	// if the physics handle is attached, move the object what we're holding
 		PhysicsHandle->SetTargetLocation(GetReachLineEnd());
@@ -73,6 +75,7 @@ void UGrabber::Grab()
 	///If we hit something attach physics handle
 	if (ActorHit)
 	{
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponent(
 		ComponentToGrab,
 		NAME_None, //No bones needed, we are not grabbing characters just objects
@@ -88,6 +91,7 @@ void UGrabber::Release()
 	//UE_LOG(LogTemp, Warning, TEXT("Grab released."))
 
 	/// Release physics handle
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
