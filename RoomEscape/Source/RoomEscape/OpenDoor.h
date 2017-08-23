@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "OpenDoor.generated.h"
 
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent); //Create a class so we can call C++ from Blueprint
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ROOMESCAPE_API UOpenDoor : public UActorComponent
@@ -17,40 +17,29 @@ public:
 	// Sets default values for this component's properties
 	UOpenDoor();
 
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	UPROPERTY(BlueprintAssignable)  //Create a class so we can call C++ from Blueprint
+	FDoorEvent OnOpen; 
+
+	UPROPERTY(BlueprintAssignable)  //Create a class so we can call C++ from Blueprint
+	FDoorEvent OnClose;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void OpenDoor();
-	void CloseDoor();
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	
-
-private:
-	UPROPERTY(EditAnywhere)
-	float OpenAngle = 90.0f;
-
-	UPROPERTY(EditAnywhere)
-	float ClosedAngle = 0.0f;
-
-	UPROPERTY(EditAnywhere)
-	float TriggerMass = 35.0f;
-	
+private:	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
-
-	UPROPERTY(EditAnywhere)
-	float DoorCloseDelay = 0.5f; //in seconds
-
-	float LastDoorOpenTime;
 	
 	AActor* Owner; //The owning door
 
 	//Returns total mass in kgs
 	float GetTotalMassOfActorsOnPlate();
 
+	UPROPERTY(EditAnywhere)
+	float TriggerMass = 490.0f;
 };
